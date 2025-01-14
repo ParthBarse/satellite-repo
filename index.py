@@ -72,7 +72,7 @@ def getSensorData():
     dt = list(satData_db.find({},{'_id':0}))
     return jsonify({"data":dt})
 
-@app.route("/sendData", methods=["POST"])
+@app.route("/sendData", methods=["GET"])
 def sendData():
     satData = db["satData"]
     ans = []
@@ -81,34 +81,8 @@ def sendData():
 
 
 @app.route('/updateData', methods=['GET'])
-def update_discount():
-    try:
-        # Extract all query parameters dynamically
-        query_params = request.args.to_dict()
-
-        # Validate that query parameters are provided
-        if not query_params:
-            return jsonify({"error": "No query parameters provided"}), 400  # Bad Request
-
-        # Access the database collection
-        satData_db = db["satData_db"]
-
-        # Iterate over the query parameters and update each corresponding document
-        for selector, value in query_params.items():
-            # Find the document with the matching selector
-            dt = satData_db.find_one({"selector": selector})
-            
-            if not dt:
-                # Skip updating if no matching document is found
-                continue
-
-            # Update the document with the new value
-            satData_db.update_one({"selector": selector}, {"$set": {"data": value}})
-
-        return jsonify({"success": True, "updated_selectors": list(query_params.keys())})
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500  # Internal Server Error
+def update_data():
+    return "Ok"
 
 
 
