@@ -80,7 +80,7 @@ def sendData():
     return jsonify({"success":True})
 
 
-@app.route('/updateData', methods=['GET'])
+@app.route('/updateData', methods=["GET"])
 def update_data():
     return "Ok"
 
